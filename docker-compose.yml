@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  app:
+    image: golang
+    build: .
+#    restart: always
+    ports:
+      - "8080:8080"
+#    volumes:
+#          - .:/go/src/github.com/user/cars
+    working_dir: /go/src/github.com/user/cars
+##    command: go build
+#    command: go run main.go
+    links:
+      - db
+  db:
+    image: mysql
+#    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cars
+
+    volumes:
+       - "./data/db/mysql:/var/lib/mysql"
+#      - db_cars:/var/lib/mysql
+#
+#  volumes:
+#    db_cars:
