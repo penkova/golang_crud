@@ -35,7 +35,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "WELCOME")
 }
 
-// Returns a list of all database cars to the response.
+// GetCars. Returns a list of all database cars to the response.
 func GetCars(w http.ResponseWriter, r *http.Request) {
 	rows, e := db.Query("SELECT * FROM cars")
 	checkErr(e)
@@ -54,7 +54,7 @@ func GetCars(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(cars)
 }
 
-// Returns a single database car matching given ID parameter.
+// GetCar. Returns a single database car matching given ID parameter.
 func GetCar(w http.ResponseWriter, r *http.Request) {
 	var car Car
 	vars := mux.Vars(r)
@@ -68,7 +68,7 @@ func GetCar(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(car)
 }
 
-// Create car into the database.
+// CreateCar. Create car into the database.
 func CreateCar(w http.ResponseWriter, r *http.Request) {
 	var car Car
 	_ = json.NewDecoder(r.Body).Decode(&car)
@@ -77,7 +77,7 @@ func CreateCar(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(car)
 }
 
-// Update car(identified by parameter) from the database.
+// UpdateCar. Update car(identified by parameter) from the database.
 func UpdateCar(w http.ResponseWriter, r *http.Request) {
 	var car Car
 	vars := mux.Vars(r)
@@ -94,7 +94,7 @@ func UpdateCar(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(car)
 }
 
-// Removes car (identified by parameter) from the database.
+// DeleteCar. Removes car (identified by parameter) from the database.
 func DeleteCar(w http.ResponseWriter, r *http.Request) {
 	var car Car
 	vars := mux.Vars(r)
